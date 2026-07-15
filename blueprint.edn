@@ -1,0 +1,40 @@
+{:itonami.blueprint/id "cloud-itonami-isic-2680"
+ :itonami.blueprint/name "Manufacture of magnetic and optical media"
+ :itonami.blueprint/isic-rev5 "2680"
+ :itonami.blueprint/domain :magnetic-optical-media/manufacturing
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:worker-safety :product-safety :chemical-safety]
+ :itonami.blueprint/governor :magnetic-optical-media-plant-operations-governor
+ :itonami.blueprint/robotics true
+ :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger :eda :cae]
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/implemented-slice
+ "MagOpticalMediaAdvisor ⊣ Magnetic and Optical Media Plant Operations
+ Governor, langgraph-clj StateGraph, append-only audit ledger. A plant
+ OPERATIONS COORDINATION actor for magnetic/optical media manufacturing
+ (magnetic-tape coating lines and CD/DVD/Blu-ray-style optical-disc
+ injection-molding and data-stamping lines producing blank and
+ pre-recorded magnetic tape, magnetic-strip cards, and optical discs)
+ -- not direct coating/molding/stamping-line-equipment control
+ authority and not content-replication-licensing authority (e.g. an
+ IFPI Source Identification (SID) Code or comparable rights-holder
+ authorization mark). Four ops (`:log-production-batch` /
+ `:schedule-maintenance` / `:flag-safety-concern` /
+ `:coordinate-shipment`), all `:effect :propose` only. Twelve concrete
+ governor checks elaborate this blueprint's four HARD invariants:
+ propose-only effect, closed op allowlist, closed proposal-effect
+ allowlist (no direct coating/molding/stamping-line-equipment
+ control), permanent equipment-actuate block, permanent
+ content-replication-licensing-authority block (this actor never
+ self-issues a source-identification/copyright-replication
+ authorization mark), independent equipment verification/registration
+ before maintenance scheduling, independent batch verification/
+ registration before shipment coordination, independent
+ shipment-quantity recompute against the batch's own logged production
+ quantity, double-schedule guard, product-type validation, substrate
+ (disc/tape/card) thickness plausibility validation, and defect-rate
+ plausibility validation. Safety-concern flagging (solvent-coating
+ chemical-hazard/equipment-safety concern) ALWAYS escalates to a human
+ plant supervisor; `:log-production-batch` is the only op eligible to
+ auto-commit, and only at phase 3 when governor-clean."}
