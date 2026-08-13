@@ -407,8 +407,14 @@
 (defn- rule-coverage-section [db]
   (let [fired (into #{} (mapcat :basis) (holds db))]
     (card "HARD-hold rule coverage"
-          (str "Which of this governor's rules this run actually made fire. A rule listed as not "
-               "exercised is not a claim that it works — it is a gap in this page's scenario set.")
+          (str "Every rule below is one this run actually made fire, read off the "
+               (code ":basis") " of a real " (code ":governor-hold")
+               " fact. This is a LOWER BOUND, not a coverage percentage: "
+               (code "magopticalmedia.governor")
+               " exposes no registry of its own rule names, so a rule that never fired cannot be "
+               "listed here at all — its absence would be silent. Read this as "
+               "&ldquo;at least these " (esc (count fired))
+               " rules discriminate&rdquo;, never as &ldquo;these are all the rules&rdquo;.")
           (table ["Rule" "Exercised by this run"]
                  (for [r (sort-by str fired)]
                    (tr (code r) "<span class=\"ok\">yes</span>"))))))

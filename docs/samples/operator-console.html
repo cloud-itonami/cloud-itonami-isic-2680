@@ -2506,7 +2506,7 @@ img,svg { max-width: 100%; height: auto; }
 <tr><td><span class="critical">:unknown-op</span></td><td><code>:actuate-stamping-line</code></td><td><code>batch-001</code></td><td>0.0</td><td>:actuate-stamping-line はこの actor が扱う操作の許可リストに無い</td></tr>
 <tr><td><span class="critical">:equipment-control-blocked</span></td><td><code>:actuate-stamping-line</code></td><td><code>batch-001</code></td><td>0.0</td><td>proposal :effect (:noop) はコーティング・成形・スタンピング設備の直接操作に該当する可能性があり、恒久的に禁止</td></tr>
 </tbody></table></div></section>
-<section class="card"><h2>HARD-hold rule coverage</h2><p class="muted">Which of this governor's rules this run actually made fire. A rule listed as not exercised is not a claim that it works — it is a gap in this page's scenario set.</p><div class="tw"><table><thead><tr><th>Rule</th><th>Exercised by this run</th></tr></thead><tbody>
+<section class="card"><h2>HARD-hold rule coverage</h2><p class="muted">Every rule below is one this run actually made fire, read off the <code>:basis</code> of a real <code>:governor-hold</code> fact. This is a LOWER BOUND, not a coverage percentage: <code>magopticalmedia.governor</code> exposes no registry of its own rule names, so a rule that never fired cannot be listed here at all — its absence would be silent. Read this as &ldquo;at least these 12 rules discriminate&rdquo;, never as &ldquo;these are all the rules&rdquo;.</p><div class="tw"><table><thead><tr><th>Rule</th><th>Exercised by this run</th></tr></thead><tbody>
 <tr><td><code>:already-scheduled</code></td><td><span class="ok">yes</span></td></tr>
 <tr><td><code>:batch-not-verified</code></td><td><span class="ok">yes</span></td></tr>
 <tr><td><code>:certification-authority-blocked</code></td><td><span class="ok">yes</span></td></tr>
