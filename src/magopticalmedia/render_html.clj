@@ -41,7 +41,7 @@
 
   Run: `clojure -M:render-html [out-file]`
   (default out-file `docs/samples/operator-console.html`)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [jp-go-dds.skin]
             [langgraph.graph :as g]
             [magopticalmedia.governor :as governor]
@@ -305,7 +305,7 @@
                    "records"             (vec (vals (store/get-records db)))}
         approver? #(contains? #{"approved-by" "approved_by" "approver"
                                 "approved_by_id" "approverid"}
-                              (str/lower-case %))
+                              (str/lower %))
         hit? (fn [coll] (boolean (some approver? (deep-key-names coll))))]
     {:approvers (vec (sort (into #{} (comp (mapcat :audit)
                                            (filter #(= :approval-granted (:t %)))
