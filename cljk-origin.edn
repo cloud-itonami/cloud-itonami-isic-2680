@@ -1,0 +1,18 @@
+{:format :kotoba.cljk-origin/v1
+ :renamed-on "2026-09-11"
+ :decision "adr-2609111500-cljk-rename-all-clojure-source (com-junkawasaki/root 90-docs/adr; owner instruction 2026-09-11)"
+ :rule "value = the extension the file had before the rename. A path ending in .clj.cljk or .cljs.cljk kept it in the name because both platform files existed (or the plain target was taken)."
+ :origins
+ {"src/magopticalmedia/advisor.cljk" ".cljc"
+  "src/magopticalmedia/governor.cljk" ".cljc"
+  "src/magopticalmedia/operation.cljk" ".cljc"
+  "src/magopticalmedia/phase.cljk" ".cljc"
+  "src/magopticalmedia/registry.cljk" ".cljc"
+  "src/magopticalmedia/render_html.cljk" ".clj"
+  "src/magopticalmedia/sim.cljk" ".cljc"
+  "src/magopticalmedia/store.cljk" ".cljc"
+  "test/magopticalmedia/governor_contract_test.cljk" ".cljc"
+  "test/magopticalmedia/operation_test.cljk" ".cljc"
+  "test/magopticalmedia/phase_test.cljk" ".cljc"
+  "test/magopticalmedia/registry_test.cljk" ".cljc"
+  "test/magopticalmedia/store_contract_test.cljk" ".cljc"}}
