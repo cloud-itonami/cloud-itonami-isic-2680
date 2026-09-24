@@ -1,0 +1,32 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README: the ISIC 2680 plant coats film with magnetic particles, and
+;; injection-moulds and data-stamps polycarbonate substrates into optical
+;; discs. The robots' physical work: waiting in the mould until the moulded
+;; 1.2 mm disc has cooled below its glass transition so the take-out robot
+;; can eject it without warping it, and the take-out stroke itself.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-2680"
+ :cases
+ [{:id :disc-cool-in-mould
+   :kind :thermal
+   :procedure "a 1.2 mm polycarbonate disc injected at 330 C cools against the mould face until its mid-plane falls below 140 C (half thickness, fixed mould-face temperature, symmetric mid-plane)"
+   :params {:thickness-m 0.0006 :conductivity-w-mk 0.20 :density-kg-m3 1200.0 :specific-heat-j-kgk 1250.0
+            :t0-c 330.0 :front-fixed? true :h-back-w-m2k 0.0
+            :threshold-c 140.0 :threshold-direction :falling :duration-s 30.0 :nodes 7}
+   :sweep {:param :t-hot-c :values [60.0 80.0 100.0 115.0 125.0]}
+   :quantity :time-to-threshold-s
+   :limit {:max 2.0 :basis "estimate: cooling share of a ~3-4 s optical-disc moulding cycle; PC properties and the 140 C eject temperature (below PC's ~145 C glass transition) are estimates"}
+   :boundary {:lo 50.0 :hi 135.0}}
+  {:id :disc-take-out-stroke
+   :kind :manipulator
+   :procedure "take-out arm lifts the moulded disc off the stamper side and swings it to the cooling spindle"
+   :params {:l1-m 0.30 :l2-m 0.25 :m1-kg 2.0 :m2-kg 1.2 :payload-kg 0.02
+            :from [0.40 0.05] :to [0.10 0.40] :steps 400}
+   :sweep {:param :duration-s :values [0.25 0.35 0.5 0.75 1.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 20.0 :basis "estimate: peak shoulder torque of a light take-out arm's servo"}
+   :boundary {:lo 0.15 :hi 1.5}}]}
