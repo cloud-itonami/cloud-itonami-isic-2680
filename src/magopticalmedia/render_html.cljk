@@ -41,7 +41,7 @@
 
   Run: `kbb -M:render-html [out-file]`
   (default out-file `docs/samples/operator-console.html`)."
-  (:require [kotoba.lang.text :as str]
+  (:require [kotoba.io :as kio] [kotoba.lang.text :as str]
             [jp-go-dds.skin]
             [langgraph.graph :as g]
             [magopticalmedia.governor :as governor]
@@ -722,8 +722,8 @@
                            "that shows no real hold")
                       {:ledger-facts (count (store/ledger db))
                        :requests (count runs)})))
-    (let [f (java.io.File. ^String out)]
-      (when-let [p (.getParentFile f)] (.mkdirs p))
+    (let [f (kio/file ^String out)]
+      (when-let [p (kio/parent-file f)] (kio/mkdirs p))
       (spit f (render result)))
     (println "wrote" out
              (str "(" (count (store/ledger db)) " ledger facts, "
