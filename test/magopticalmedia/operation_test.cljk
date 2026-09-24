@@ -4,7 +4,7 @@
   contract (HARD holds, escalation, phase gating) is exercised in
   `magopticalmedia.governor-contract-test`; the Store contract in
   `magopticalmedia.store-contract-test`."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [langgraph.graph :as g]
             [magopticalmedia.operation :as op]
             [magopticalmedia.store :as store]))
